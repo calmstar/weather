@@ -15,7 +15,8 @@ use GuzzleHttp\Client;
 use Calmstar\Weather\Exceptions\HttpException;
 use Calmstar\Weather\Exceptions\InvalidArgumentException;
 
-// 看到 14 节 ，laravel集成优化
+
+
 
 class Weather
 {
@@ -38,9 +39,8 @@ class Weather
         $this->guzzleOptions = $options;
     }
 
-    public function getWeather($city, $type = 'base', $format = 'json')
-    {
-        $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
+    public function getWeather($city,$type = 'base',$format = 'json')
+    {$url = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
         if (!in_array(strtolower($format), ['xml', 'json'])) {
             throw new InvalidArgumentException('Invalid response format: '.$format);
