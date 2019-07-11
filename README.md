@@ -4,6 +4,9 @@
 
 [![Build Status](https://travis-ci.org/calmstar/weather.svg?branch=master)](https://travis-ci.org/calmstar/weather)
 
+![StyleCI build status](https://github.styleci.io/repos/196345838/shield) 
+
+
 ## 安装
 
 ```shell
