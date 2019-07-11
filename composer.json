@@ -1,0 +1,28 @@
+{
+    "name": "calmstar\/weather",
+    "description": "a weather sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "VagHomestead",
+            "email": "vag@ubuntu.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": "^8.2",
+        "mockery/mockery": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Calmstar\\Weather\\": "./src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Calmstar\\Weather\\ServiceProvider"
+            ]
+        }
+    }
+}
