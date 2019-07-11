@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the calmstar/weather.
+ *
+ * (c) calmstar<i@calmstar.me>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Calmstar\Weather\Tests;
 
 use GuzzleHttp\Client;
@@ -11,8 +20,10 @@ use Calmstar\Weather\Exceptions\HttpException;
 use Calmstar\Weather\Exceptions\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class WeatherTest extends TestCase {
-    public function testGetWeather() {
+class WeatherTest extends TestCase
+{
+    public function testGetWeather()
+    {
         // 创建模拟接口响应值。
         $response = new Response(200, [], '{"success": true}');
 
@@ -26,7 +37,7 @@ class WeatherTest extends TestCase {
                 'city' => '深圳',
                 'output' => 'json',
                 'extensions' => 'base',
-            ]
+            ],
         ])->andReturn($response);
 
         // 将 `getHttpClient` 方法替换为上面创建的 http client 为返回值的模拟方法。
@@ -55,14 +66,16 @@ class WeatherTest extends TestCase {
         $this->assertSame('<hello>content</hello>', $w->getWeather('深圳', 'all', 'xml'));
     }
 
-    public function testGetHttpClient() {
+    public function testGetHttpClient()
+    {
         $w = new Weather('mock-key');
 
         // 断言返回结果为 GuzzleHttp\ClientInterface 实例
         $this->assertInstanceOf(ClientInterface::class, $w->getHttpClient());
     }
 
-    public function testSetGuzzleOptions() {
+    public function testSetGuzzleOptions()
+    {
         $w = new Weather('mock-key');
 
         // 设置参数前，timeout 为 null
@@ -76,7 +89,8 @@ class WeatherTest extends TestCase {
     }
 
     // 检查 $type 参数
-    public function testGetWeatherWithInvalidType() {
+    public function testGetWeatherWithInvalidType()
+    {
         $w = new Weather('mock-key');
 
         // 断言会抛出此非法参数类
@@ -89,7 +103,8 @@ class WeatherTest extends TestCase {
     }
 
     // 检查 $format 参数
-    public function testGetWeatherWithInvalidFormat() {
+    public function testGetWeatherWithInvalidFormat()
+    {
         $w = new Weather('mock-key');
 
         // 断言会抛出此异常类
@@ -105,7 +120,8 @@ class WeatherTest extends TestCase {
         $this->fail('Failed to assert getWeather throw exception with invalid argument.');
     }
 
-    public function testGetWeatherWithGuzzleRuntimeException() {
+    public function testGetWeatherWithGuzzleRuntimeException()
+    {
         $client = \Mockery::mock(Client::class);
         $client->allows()
             ->get(new AnyArgs())// 由于上面的用例已经验证过参数传递，所以这里就不关心参数了。
@@ -120,6 +136,4 @@ class WeatherTest extends TestCase {
 
         $w->getWeather('深圳');
     }
-
-
 }
